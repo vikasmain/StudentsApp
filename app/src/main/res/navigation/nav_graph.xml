@@ -1,0 +1,23 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home_fragment">
+
+    <fragment
+        android:id="@+id/nav_home_fragment"
+        android:name="com.example.studentsapp.fragments.HomeFragment"
+        tools:layout="@layout/home_fragment">
+
+        <action
+            android:id="@+id/action_first_to_second"
+            app:destination="@id/nav_quiz_fragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_quiz_fragment"
+        android:name="com.example.studentsapp.fragments.QuizFragment"
+        tools:layout="@layout/quiz_fragment"/>
+
+</navigation>
