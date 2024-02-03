@@ -22,11 +22,6 @@ const val BASE_URL = "https://web.com/"
 class StudentsAppModule {
 
     companion object {
-        @Provides
-        @Singleton
-        fun providesActivityMainBinding(activity: AppCompatActivity): ActivityMainBinding {
-            return ActivityMainBinding.inflate(LayoutInflater.from(activity))
-        }
 
         @Singleton
         @Provides

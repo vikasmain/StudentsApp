@@ -21,7 +21,9 @@ android {
             useSupportLibrary = true
         }
     }
-
+    kapt {
+        correctErrorTypes = true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -65,11 +67,19 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
-    implementation("com.google.dagger:hilt-android:2.44")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-compiler:2.50")
+
+    // For instrumentation tests
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.50")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.50")
+
+    // For local unit tests
+    testImplementation("com.google.dagger:hilt-android-testing:2.50")
+    kaptTest("com.google.dagger:hilt-compiler:2.50")
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
     implementation("androidx.compose.ui:ui-tooling-preview")
