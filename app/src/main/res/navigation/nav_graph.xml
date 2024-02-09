@@ -5,19 +5,40 @@
     app:startDestination="@id/nav_home_fragment">
 
     <fragment
+        android:id="@+id/nav_register_fragment"
+        android:name="com.example.studentsapp.fragments.RegisterFragment"
+        tools:layout="@layout/register_fragment">
+
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/nav_login_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login_fragment"
+        android:name="com.example.studentsapp.fragments.LoginFragment"
+        tools:layout="@layout/login_fragment">
+
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@+id/nav_home_fragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_home_fragment"
         android:name="com.example.studentsapp.fragments.HomeFragment"
         tools:layout="@layout/home_fragment">
 
-        <action
-            android:id="@+id/action_first_to_second"
-            app:destination="@id/nav_quiz_fragment"/>
-
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_quiz_fragment"
         android:name="com.example.studentsapp.fragments.QuizFragment"
-        tools:layout="@layout/quiz_fragment"/>
-
+        tools:layout="@layout/quiz_fragment" />
 </navigation>

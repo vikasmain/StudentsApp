@@ -80,9 +80,18 @@ dependencies {
     kaptTest("com.google.dagger:hilt-compiler:2.50")
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+
+    // alternatively - without Android dependencies for tests
+    testImplementation("androidx.paging:paging-common-ktx:3.2.1")
+
+    // optional - Guava ListenableFuture support
+    implementation("androidx.paging:paging-guava:3.2.1")
+
     implementation("androidx.compose.material3:material3")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
