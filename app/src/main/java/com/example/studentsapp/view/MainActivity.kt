@@ -1,14 +1,10 @@
-package com.example.studentsapp
+package com.example.studentsapp.view
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import com.example.studentsapp.R
 import com.example.studentsapp.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

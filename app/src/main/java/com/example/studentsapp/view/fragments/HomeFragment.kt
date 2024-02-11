@@ -1,4 +1,4 @@
-package com.example.studentsapp.fragments
+package com.example.studentsapp.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.studentsapp.view.FeedPagingAdapter
 import com.example.studentsapp.databinding.HomeFragmentBinding
+import com.example.studentsapp.view.PagingLoaderAdapter
 import com.example.studentsapp.viewmodel.FeedViewModel
-import com.example.studentsapp.viewmodel.UpdatesViewModel
 import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
 class HomeFragment : Fragment() {
@@ -34,10 +35,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.flow.onEach {
-
-        }.catch {
-
-        }.launchIn(scope)
+        val feedPagingAdapter = FeedPagingAdapter()
+        with(homeFragmentBinding.recyclerView) {
+            adapter = feedPagingAdapter.withLoadStateHeaderAndFooter(
+                header = PagingLoaderAdapter(),
+                footer = PagingLoaderAdapter()
+            )
+            layoutManager = LinearLayoutManager(activity)
+        }
+        lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                feedPagingAdapter.submitData(it)
+            }
+        }
     }
 }

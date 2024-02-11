@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/nav_register_fragment"
-        android:name="com.example.studentsapp.fragments.RegisterFragment"
+        android:name="com.example.studentsapp.view.fragments.RegisterFragment"
         tools:layout="@layout/register_fragment">
 
         <action
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/nav_login_fragment"
-        android:name="com.example.studentsapp.fragments.LoginFragment"
+        android:name="com.example.studentsapp.view.fragments.LoginFragment"
         tools:layout="@layout/login_fragment">
 
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/nav_home_fragment"
-        android:name="com.example.studentsapp.fragments.HomeFragment"
+        android:name="com.example.studentsapp.view.fragments.HomeFragment"
         tools:layout="@layout/home_fragment">
 
         <argument
@@ -39,6 +39,6 @@
 
     <fragment
         android:id="@+id/nav_quiz_fragment"
-        android:name="com.example.studentsapp.fragments.QuizFragment"
+        android:name="com.example.studentsapp.view.fragments.QuizFragment"
         tools:layout="@layout/quiz_fragment" />
 </navigation>

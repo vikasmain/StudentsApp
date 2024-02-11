@@ -1,4 +1,4 @@
-package com.example.studentsapp
+package com.example.studentsapp.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,15 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studentsapp.R
 import com.example.studentsapp.model.FeedResponse
 
 class FeedPagingAdapter :
     PagingDataAdapter<FeedResponse.FeedItem, FeedPagingAdapter.FeedViewHolder>(COMPARATOR) {
+
+    fun updateItemList(feedList: List<FeedResponse.FeedItem>) {
+
+    }
 
     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
