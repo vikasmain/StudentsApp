@@ -7,4 +7,7 @@ import com.example.studentsapp.model.FeedResponse
 
 @Database(entities = [FeedResponse.FeedItem::class, FeedRemoteKeys::class], version = 1)
 abstract class FeedDatabase : RoomDatabase() {
+
+    abstract fun feedItemDao() : FeedItemDao
+    abstract fun remoteKeysDao() : RemoteKeysDao
 }

@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class FeedRemoteKeys(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val prevKey: String?,
-    val nextKey: String?
+    val prevKey: Int?,
+    val nextKey: Int?
 )
