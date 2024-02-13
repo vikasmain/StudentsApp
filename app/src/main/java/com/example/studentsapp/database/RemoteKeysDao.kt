@@ -9,7 +9,7 @@ import com.example.studentsapp.model.FeedRemoteKeys
 interface RemoteKeysDao {
 
     @Query("Select * from FeedRemoteKeys WHERE id= :id")
-    suspend fun getRemoteKey(id: Int): PagingSource<Int, FeedRemoteKeys>
+    suspend fun getRemoteKey(id: Int): FeedRemoteKeys
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addRemoteKeys(feedList: List<FeedRemoteKeys>)

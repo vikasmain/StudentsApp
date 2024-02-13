@@ -16,8 +16,8 @@ class FeedRemoteMediator @Inject constructor(
     private val feedDatabase: FeedDatabase
 ) : RemoteMediator<Int, FeedResponse.FeedItem>() {
 
-    val feedDao = feedDatabase.feedItemDao()
-    val remoteKeysDao = feedDatabase.remoteKeysDao()
+    private val feedDao = feedDatabase.feedItemDao()
+    private val remoteKeysDao = feedDatabase.remoteKeysDao()
 
     override suspend fun load(
         loadType: LoadType,
@@ -80,10 +80,10 @@ class FeedRemoteMediator @Inject constructor(
     }
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, Result>
+        state: PagingState<Int, FeedResponse.FeedItem>
     ): FeedRemoteKeys? {
         return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?._id?.let { id ->
+            state.closestItemToPosition(position)?.id?.let { id ->
                 remoteKeysDao.getRemoteKey(id = id)
             }
         }
@@ -99,12 +99,11 @@ class FeedRemoteMediator @Inject constructor(
     }
 
     private suspend fun getRemoteKeyForLastItem(
-        state: PagingState<Int, Result>
+        state: PagingState<Int, FeedResponse.FeedItem>
     ): FeedRemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { feedITem ->
                 remoteKeysDao.getRemoteKey(id = feedITem.id)
             }
     }
-
 }
