@@ -20,7 +20,7 @@ class UpdatesViewModel @Inject constructor(
 
     fun getFeedData() {
         viewModelScope.launch {
-            feedRepository.getFeedList()
+            feedRepository.getFeedList(1)
                 .onEach {
                     feedListStateFlow.value = it
                 }

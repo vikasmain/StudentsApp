@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
-class HomeFragment : Fragment() {
+class FeedFragment : Fragment() {
 
     private val viewModel: FeedViewModel by viewModels()
     private val scope = MainScope() + CoroutineName("Home Fragment")

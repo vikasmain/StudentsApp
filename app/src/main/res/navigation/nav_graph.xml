@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/nav_home_fragment"
-        android:name="com.example.studentsapp.view.fragments.HomeFragment"
+        android:name="com.example.studentsapp.view.fragments.FeedFragment"
         tools:layout="@layout/home_fragment">
 
         <argument

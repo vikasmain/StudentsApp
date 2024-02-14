@@ -13,9 +13,9 @@ import javax.inject.Inject
 class FeedRepository @Inject constructor(
     private val feedApiService: FeedApiService
 ) {
-    fun getFeedList(): Flow<FeedResponse> {
+    fun getFeedList(pageNumber: Int): Flow<FeedResponse> {
         return flow {
-            val data = feedApiService.getFeedList()
+            val data = feedApiService.getFeedList(pageNumber)
             emit(data)
         }.flowOn(Dispatchers.IO)
     }
