@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.studentsapp.R
 import com.example.studentsapp.databinding.RegisterFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     lateinit var registerFragmentBinding: RegisterFragmentBinding
@@ -18,9 +20,9 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         registerFragmentBinding = RegisterFragmentBinding.inflate(layoutInflater)
-        registerFragmentBinding.button2.setOnClickListener {
-            findNavController().navigate(R.id.action_register_to_login)
-        }
+//        registerFragmentBinding.button2.setOnClickListener {
+//            findNavController().navigate(R.id.action_register_to_login)
+//        }
         return registerFragmentBinding.root
     }
 

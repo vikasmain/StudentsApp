@@ -1,9 +1,17 @@
 package com.example.studentsapp.view
 
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.studentsapp.R
 import com.example.studentsapp.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,24 +23,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.bottomNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {
-                    true
-                }
+        val host: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navHostFragment) as? NavHostFragment? ?: return
 
-                R.id.quiz -> {
-                    true
-                }
-
-                R.id.profile -> {
-                    true
-                }
-
-                else -> {
-                    true
-                }
-            }
-        }
+        val navController = host.navController
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav?.setupWithNavController(navController)
     }
 }

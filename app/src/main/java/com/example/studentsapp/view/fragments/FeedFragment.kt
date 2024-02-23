@@ -12,18 +12,20 @@ import com.example.studentsapp.view.FeedPagingAdapter
 import com.example.studentsapp.databinding.HomeFragmentBinding
 import com.example.studentsapp.view.PagingLoaderAdapter
 import com.example.studentsapp.viewmodel.FeedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
+@AndroidEntryPoint
 class FeedFragment : Fragment() {
 
     private val viewModel: FeedViewModel by viewModels()
     private val scope = MainScope() + CoroutineName("Home Fragment")
 
-    lateinit var homeFragmentBinding: HomeFragmentBinding
+    private lateinit var homeFragmentBinding: HomeFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.studentsapp.R
 import com.example.studentsapp.databinding.LoginFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     lateinit var loginFragmentBinding: LoginFragmentBinding
@@ -23,9 +25,9 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         loginFragmentBinding = LoginFragmentBinding.inflate(layoutInflater, container, false)
-        loginFragmentBinding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_login_to_home)
-        }
+//        loginFragmentBinding.button.setOnClickListener {
+//            findNavController().navigate(R.id.action_login_to_home)
+//        }
         return loginFragmentBinding.root
     }
 }

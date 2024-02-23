@@ -2,43 +2,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_home_fragment">
+    app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/nav_register_fragment"
-        android:name="com.example.studentsapp.view.fragments.RegisterFragment"
-        tools:layout="@layout/register_fragment">
-
-        <action
-            android:id="@+id/action_register_to_login"
-            app:destination="@id/nav_login_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_login_fragment"
-        android:name="com.example.studentsapp.view.fragments.LoginFragment"
-        tools:layout="@layout/login_fragment">
-
-        <action
-            android:id="@+id/action_login_to_home"
-            app:destination="@+id/nav_home_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_home_fragment"
+        android:id="@+id/home"
         android:name="com.example.studentsapp.view.fragments.FeedFragment"
-        tools:layout="@layout/home_fragment">
-
-        <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
-            android:name="password"
-            app:argType="string" />
-    </fragment>
+        android:label="Feed"
+        tools:layout="@layout/home_fragment" />
 
     <fragment
-        android:id="@+id/nav_quiz_fragment"
+        android:id="@+id/quiz"
         android:name="com.example.studentsapp.view.fragments.QuizFragment"
+        android:label="Quiz"
         tools:layout="@layout/quiz_fragment" />
+
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.studentsapp.view.fragments.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.studentsapp.view.fragments.ProfileFragment"
+        android:label="Profile" />
 </navigation>
