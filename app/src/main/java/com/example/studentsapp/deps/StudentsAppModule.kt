@@ -1,13 +1,9 @@
 package com.example.studentsapp.deps
 
-import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
-import com.example.studentsapp.api.FeedApiService
-import com.example.studentsapp.databinding.ActivityMainBinding
+import com.example.studentsapp.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -53,7 +49,7 @@ class StudentsAppModule {
 
         @Singleton
         @Provides
-        fun provideCurrencyService(retrofit: Retrofit): FeedApiService =
-            retrofit.create(FeedApiService::class.java)
+        fun provideCurrencyService(retrofit: Retrofit): ApiService =
+            retrofit.create(ApiService::class.java)
     }
 }

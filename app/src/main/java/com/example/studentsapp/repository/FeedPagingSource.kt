@@ -2,10 +2,10 @@ package com.example.studentsapp.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.studentsapp.api.FeedApiService
+import com.example.studentsapp.api.ApiService
 import com.example.studentsapp.model.FeedResponse
 
-class FeedPagingSource(private val feedApiService: FeedApiService) :
+class FeedPagingSource(private val apiService: ApiService) :
     PagingSource<Int, FeedResponse.FeedItem>() {
     override fun getRefreshKey(state: PagingState<Int, FeedResponse.FeedItem>): Int? {
         //anchor position = recently accessed page.
@@ -25,7 +25,7 @@ class FeedPagingSource(private val feedApiService: FeedApiService) :
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FeedResponse.FeedItem> {
         return try {
             val pagePosition = params.key ?: 1 // position of page to be load
-            val data = feedApiService.getFeedList(pagePosition)
+            val data = apiService.getFeedList(pagePosition)
             LoadResult.Page(
                 data = data.feedItem,
                 nextKey = getNextKey(pagePosition, data),

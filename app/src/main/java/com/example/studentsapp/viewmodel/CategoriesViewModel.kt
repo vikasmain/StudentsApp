@@ -2,7 +2,9 @@ package com.example.studentsapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.studentsapp.model.CategoriesResponse
 import com.example.studentsapp.model.FeedResponse
+import com.example.studentsapp.repository.CategoriesRepository
 import com.example.studentsapp.repository.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,15 +14,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UpdatesViewModel @Inject constructor(
-    private val feedRepository: FeedRepository
+class CategoriesViewModel @Inject constructor(
+    private val categoriesRepository: CategoriesRepository
 ) : ViewModel() {
 
-    val feedListStateFlow = MutableStateFlow<FeedResponse?>(null)
+    val feedListStateFlow = MutableStateFlow<CategoriesResponse?>(null)
 
-    fun getFeedData() {
+    fun getCategories() {
         viewModelScope.launch {
-            feedRepository.getFeedList(1)
+            categoriesRepository.getCategories()
                 .onEach {
                     feedListStateFlow.value = it
                 }

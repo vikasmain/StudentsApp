@@ -5,14 +5,14 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.studentsapp.api.FeedApiService
+import com.example.studentsapp.api.ApiService
 import com.example.studentsapp.model.FeedRemoteKeys
 import com.example.studentsapp.model.FeedResponse
 import javax.inject.Inject
 
 @ExperimentalPagingApi
 class FeedRemoteMediator @Inject constructor(
-    private val feedApiService: FeedApiService,
+    private val apiService: ApiService,
     private val feedDatabase: FeedDatabase
 ) : RemoteMediator<Int, FeedResponse.FeedItem>() {
 
@@ -49,7 +49,7 @@ class FeedRemoteMediator @Inject constructor(
                 }
             }
             //Fetching response from api
-            val response = feedApiService.getFeedList(currentPage)
+            val response = apiService.getFeedList(currentPage)
             val endOfPaginationReached = response.totalPages == currentPage
 
             val prevPage = if (currentPage == 1) null else currentPage - 1

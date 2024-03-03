@@ -18,9 +18,9 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.example.studentsapp.view.fragments.SearchFragment"
+        android:name="com.example.studentsapp.view.fragments.CategoriesListFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_categories_list" />
 
     <fragment
         android:id="@+id/profile"
