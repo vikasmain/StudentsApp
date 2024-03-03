@@ -9,12 +9,15 @@ data class CategoriesResponse(
     data class CategoriesData(
         @SerializedName("index") val index: Int,
         @SerializedName("title") val title: String,
-        @SerializedName("items") val items: CategoriesItem
+        @SerializedName("description") val description: String?,
+        @SerializedName("items") val items: List<CategoriesItem>
     ) {
         data class CategoriesItem(
             @SerializedName("title") val title: String,
             @SerializedName("description") val description: String,
-            @SerializedName("type") val type: Type
+            @SerializedName("type") val type: Type,
+            @SerializedName("likes") val likes: Int,
+            @SerializedName("comments") val comments: Int
         )
     }
 }
