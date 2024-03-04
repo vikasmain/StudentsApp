@@ -12,7 +12,7 @@ import com.example.studentsapp.model.CategoriesResponse
 
 class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.CategoriesViewHolder>() {
 
-    internal val categoriesList = mutableListOf<CategoriesResponse.CategoriesData>()
+    private val categoriesList = mutableListOf<CategoriesResponse.CategoriesData>()
 
     fun updateCategoriesList(categoriesData: List<CategoriesResponse.CategoriesData>) {
         categoriesList.clear()
@@ -28,15 +28,16 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
             }
         }
 
-        class CategoriesHeader(view: View) : CategoriesViewHolder(view) {
+        class CategoriesHeader(view: CategoriesHeaderLayoutBinding) : CategoriesViewHolder(view.root) {
             fun bind() {
 
             }
         }
 
-        class CategoriesSearch(view: View) : CategoriesViewHolder(view) {
+        class CategoriesSearch(val view: CategoriesSearchLayoutBinding) :
+            CategoriesViewHolder(view.root) {
             fun bind() {
-
+                view.searchBar.visibility = View.VISIBLE
             }
         }
     }
@@ -59,7 +60,7 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    ).root
+                    )
                 )
             }
 
