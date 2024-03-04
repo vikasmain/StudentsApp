@@ -5,16 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.studentsapp.data.CategoryItemData
 import com.example.studentsapp.databinding.CategoriesHeaderLayoutBinding
 import com.example.studentsapp.databinding.CategoriesItemBinding
 import com.example.studentsapp.databinding.CategoriesSearchLayoutBinding
-import com.example.studentsapp.model.CategoriesResponse
 
 class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.CategoriesViewHolder>() {
 
-    private val categoriesList = mutableListOf<CategoriesResponse.CategoriesData>()
+    val categoriesList = mutableListOf<CategoryItemData>()
 
-    fun updateCategoriesList(categoriesData: List<CategoriesResponse.CategoriesData>) {
+    fun updateCategoriesList(categoriesData: List<CategoryItemData>) {
         categoriesList.clear()
         categoriesList.addAll(categoriesData)
     }
@@ -23,14 +23,16 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
 
         class CategoriesItemHolder(view: View) : CategoriesViewHolder(view) {
 
-            fun bind() {
+            fun bind(categoriesHeader: CategoryItemData.CategoryItem?) {
 
             }
         }
 
-        class CategoriesHeader(view: CategoriesHeaderLayoutBinding) : CategoriesViewHolder(view.root) {
-            fun bind() {
-
+        class CategoriesHeader(val view: CategoriesHeaderLayoutBinding) :
+            CategoriesViewHolder(view.root) {
+            fun bind(categoryHeader: CategoryItemData.CategoryHeader?) {
+                view.title.text = categoryHeader?.title
+                view.description.text = categoryHeader?.description
             }
         }
 
@@ -50,7 +52,7 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    ).root
+                    )
                 )
             }
 
@@ -83,7 +85,9 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
         when (holder) {
             is CategoriesViewHolder.CategoriesItemHolder -> {
-                holder.bind()
+                holder.bind(
+                    categoriesList[position] as? CategoryItemData.CategoryItem
+                )
             }
 
             is CategoriesViewHolder.CategoriesSearch -> {
@@ -91,7 +95,9 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
             }
 
             is CategoriesViewHolder.CategoriesHeader -> {
-                holder.bind()
+                holder.bind(
+                    categoriesList[position] as? CategoryItemData.CategoryHeader
+                )
             }
 
             else -> {}

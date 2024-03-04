@@ -44,9 +44,7 @@ class CategoriesListFragment : Fragment() {
                 fragmentCategoriesBinding.categoriesList.adapter = adapter
                 fragmentCategoriesBinding.categoriesList.layoutManager =
                     LinearLayoutManager(activity)
-                it?.data?.let { data ->
-                    adapter.updateCategoriesList(data)
-                }
+                it?.let { it1 -> adapter.updateCategoriesList(it1) }
             }.catch {
 
             }
