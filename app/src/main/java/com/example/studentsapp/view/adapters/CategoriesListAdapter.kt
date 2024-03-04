@@ -12,7 +12,7 @@ import com.example.studentsapp.model.CategoriesResponse
 
 class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.CategoriesViewHolder>() {
 
-    private val categoriesList = mutableListOf<CategoriesResponse.CategoriesData>()
+    internal val categoriesList = mutableListOf<CategoriesResponse.CategoriesData>()
 
     fun updateCategoriesList(categoriesData: List<CategoriesResponse.CategoriesData>) {
         categoriesList.clear()
