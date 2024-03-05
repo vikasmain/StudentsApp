@@ -1,5 +1,6 @@
 package com.example.studentsapp.repository
 
+import android.util.Log
 import com.example.studentsapp.api.ApiService
 import com.example.studentsapp.model.CategoriesResponse
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +14,7 @@ class CategoriesRepository @Inject constructor(
     fun getCategories(): Flow<CategoriesResponse> {
         return flow {
             val data = apiService.getCategories()
+            Log.d("RideAct",""+data)
             emit(data)
         }
     }

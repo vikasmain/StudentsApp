@@ -1,17 +1,17 @@
 package com.example.studentsapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studentsapp.data.CategoryItemData
 import com.example.studentsapp.model.CategoriesResponse
-import com.example.studentsapp.model.FeedResponse
 import com.example.studentsapp.repository.CategoriesRepository
-import com.example.studentsapp.repository.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,10 +27,15 @@ class CategoriesViewModel @Inject constructor(
     val feedListStateFlow = MutableStateFlow<List<CategoryItemData>?>(null)
 
     fun getCategories() {
+        Log.d("RideAct", "entered here")
         viewModelScope.launch {
+            Log.d("RideAct", " here")
             categoriesRepository.getCategories()
                 .map {
                     mapCategoriesItemData(it)
+                }
+                .onStart {
+
                 }
                 .onEach {
                     feedListStateFlow.value = it

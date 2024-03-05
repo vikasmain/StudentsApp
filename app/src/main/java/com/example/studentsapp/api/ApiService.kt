@@ -10,6 +10,6 @@ interface ApiService {
     @GET("/feed-response")
     suspend fun getFeedList(@Query("page_number") pageNumber: Int): FeedResponse
 
-    @GET("/categories")
+    @GET("categories")
     suspend fun getCategories(): CategoriesResponse
 }

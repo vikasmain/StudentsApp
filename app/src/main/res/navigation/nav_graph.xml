@@ -11,7 +11,7 @@
         tools:layout="@layout/home_fragment" />
 
     <fragment
-        android:id="@+id/quiz"
+        android:id="@+id/notices"
         android:name="com.example.studentsapp.view.fragments.QuizFragment"
         android:label="Quiz"
         tools:layout="@layout/quiz_fragment" />

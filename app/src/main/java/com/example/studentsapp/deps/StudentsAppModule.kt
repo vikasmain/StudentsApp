@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-const val BASE_URL = "https://web.com/"
+const val BASE_URL = "https://feedlist.free.beeceptor.com/"
 
 @Module
 @InstallIn(SingletonComponent::class)
