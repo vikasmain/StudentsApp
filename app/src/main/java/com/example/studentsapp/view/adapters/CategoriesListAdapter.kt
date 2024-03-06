@@ -21,10 +21,12 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
 
     sealed class CategoriesViewHolder(view: View) : ViewHolder(view) {
 
-        class CategoriesItemHolder(view: View) : CategoriesViewHolder(view) {
+        class CategoriesItemHolder(val view: CategoriesItemBinding) :
+            CategoriesViewHolder(view.root) {
 
-            fun bind(categoriesHeader: CategoryItemData.CategoryItem?) {
-
+            fun bind(item: CategoryItemData.CategoryItem?) {
+                view.title.text = item?.title
+                view.description.text = item?.description
             }
         }
 
@@ -72,7 +74,7 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    ).root
+                    )
                 )
             }
         }
