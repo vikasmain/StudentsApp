@@ -14,6 +14,7 @@ import com.example.studentsapp.view.adapters.CategoriesListAdapter
 import com.example.studentsapp.viewmodel.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -47,7 +48,7 @@ class CategoriesListFragment : Fragment() {
                 it?.let { it1 -> adapter.updateCategoriesList(it1) }
             }.catch {
 
-            }
+            }.collect()
         }
     }
 }

@@ -9,6 +9,7 @@ import com.example.studentsapp.repository.CategoriesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
@@ -27,31 +28,28 @@ class CategoriesViewModel @Inject constructor(
     val feedListStateFlow = MutableStateFlow<List<CategoryItemData>?>(null)
 
     fun getCategories() {
-        Log.d("RideAct", "entered here")
         viewModelScope.launch {
-            Log.d("RideAct", " here")
             categoriesRepository.getCategories()
                 .map {
                     mapCategoriesItemData(it)
                 }
-                .onStart {
-
+                .catch {
+                    feedListStateFlow.value = null
+                }.onStart {
                 }
                 .onEach {
                     feedListStateFlow.value = it
                 }
-                .catch {
-                    feedListStateFlow.value = null
-                }
+                .collect()
         }
     }
 
     private fun mapCategoriesItemData(it: CategoriesResponse): List<CategoryItemData> {
         val categoriesItemDataList = mutableListOf<CategoryItemData>()
-        if (it.data.isEmpty().not()) {
+        if (it.data.categories.isEmpty().not()) {
             categoriesItemDataList.add(CategoryItemData.SearchBar)
         }
-        it.data.sortedBy { it.index }.forEach {
+        it.data.categories.sortedBy { it.index }.forEach {
             categoriesItemDataList.add(
                 CategoryItemData.CategoryHeader(
                     title = it.title,

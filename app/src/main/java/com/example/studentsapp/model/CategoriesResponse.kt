@@ -4,21 +4,25 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoriesResponse(
     @SerializedName("success") val success: Boolean,
-    @SerializedName("data") val data: List<CategoriesData>
+    @SerializedName("data") val data: Categories
 ) {
-    data class CategoriesData(
-        @SerializedName("index") val index: Int,
-        @SerializedName("title") val title: String,
-        @SerializedName("description") val description: String?,
-        @SerializedName("items") val items: List<CategoriesItem>
+    data class Categories(
+        @SerializedName("categories") val categories: List<CategoriesData>
     ) {
-        data class CategoriesItem(
+        data class CategoriesData(
+            @SerializedName("index") val index: Int,
             @SerializedName("title") val title: String,
-            @SerializedName("description") val description: String,
-            @SerializedName("type") val type: Type,
-            @SerializedName("likes") val likes: Int,
-            @SerializedName("comments") val comments: Int
-        )
+            @SerializedName("description") val description: String?,
+            @SerializedName("items") val items: List<CategoriesItem>
+        ) {
+            data class CategoriesItem(
+                @SerializedName("title") val title: String,
+                @SerializedName("description") val description: String?,
+                @SerializedName("type") val type: Type?,
+                @SerializedName("likes") val likes: Int?,
+                @SerializedName("comments") val comments: Int?
+            )
+        }
     }
 }
 

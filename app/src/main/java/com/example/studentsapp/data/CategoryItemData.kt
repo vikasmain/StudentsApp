@@ -9,9 +9,9 @@ sealed class CategoryItemData {
 
     data class CategoryItem(
         val title: String,
-        val description: String,
-        val comments: Int,
-        val likes: Int
+        val description: String?,
+        val comments: Int?,
+        val likes: Int?
     ) : CategoryItemData()
 
     data object SearchBar : CategoryItemData()
