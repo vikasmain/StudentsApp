@@ -1,6 +1,7 @@
 package com.example.studentsapp.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,7 +46,9 @@ class CategoriesListFragment : Fragment() {
                 fragmentCategoriesBinding.categoriesList.adapter = adapter
                 fragmentCategoriesBinding.categoriesList.layoutManager =
                     LinearLayoutManager(activity)
-                it?.let { it1 -> adapter.updateCategoriesList(it1) }
+                it?.let {
+                    it1 -> adapter.updateCategoriesList(it1)
+                }
             }.catch {
 
             }.collect()

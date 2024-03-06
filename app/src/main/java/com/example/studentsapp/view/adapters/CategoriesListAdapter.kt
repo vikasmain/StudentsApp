@@ -68,6 +68,16 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
                 )
             }
 
+            CategoriesViewType.ITEM.ordinal -> {
+                CategoriesViewHolder.CategoriesItemHolder(
+                    CategoriesItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+
             else -> {
                 CategoriesViewHolder.CategoriesItemHolder(
                     CategoriesItemBinding.inflate(
