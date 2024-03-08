@@ -1,5 +1,6 @@
 package com.example.studentsapp.view.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,6 +93,14 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
 
     override fun getItemCount(): Int {
         return categoriesList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (categoriesList[position]) {
+            is CategoryItemData.CategoryItem -> CategoriesViewType.ITEM.ordinal
+            is CategoryItemData.CategoryHeader -> CategoriesViewType.HEADER.ordinal
+            CategoryItemData.SearchBar -> CategoriesViewType.SEARCH.ordinal
+        }
     }
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
