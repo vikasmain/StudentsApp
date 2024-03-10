@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.studentsapp.model.CategoriesResponse.Categories.CategoriesData
+import androidx.room.TypeConverters
+import com.example.studentsapp.model.ArrayListConverter
+import com.example.studentsapp.model.CategoriesData
 
+@TypeConverters(ArrayListConverter::class)
 @Database(entities = [CategoriesData::class], version = 1)
 abstract class CategoryDatabase : RoomDatabase() {
 

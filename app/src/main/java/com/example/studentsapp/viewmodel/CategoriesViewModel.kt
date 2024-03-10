@@ -56,13 +56,13 @@ class CategoriesViewModel @Inject constructor(
                     description = it.description
                 )
             )
-            it.items.forEach {
+            it.items.forEach { categoryItem ->
                 categoriesItemDataList.add(
                     CategoryItemData.CategoryItem(
-                        title = it.title,
-                        description = it.description,
-                        likes = it.likes,
-                        comments = it.comments
+                        title = categoryItem.title,
+                        description = categoryItem.description,
+                        likes = categoryItem.likes,
+                        comments = categoryItem.comments
                     )
                 )
             }

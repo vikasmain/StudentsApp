@@ -3,8 +3,7 @@ package com.example.studentsapp.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.studentsapp.model.CategoriesResponse
-import com.example.studentsapp.model.CategoriesResponse.Categories.CategoriesData
+import com.example.studentsapp.model.CategoriesData
 
 @Dao
 interface CategoryDao {
