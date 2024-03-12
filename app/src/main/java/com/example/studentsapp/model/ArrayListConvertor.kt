@@ -11,12 +11,12 @@ import com.google.gson.reflect.TypeToken
 class ArrayListConverter {
 
     @TypeConverter
-    fun fromString(serialized: String): List<CategoriesData.CategoriesItem> {
-        return listOf(Gson().fromJson(serialized, CategoriesData.CategoriesItem::class.java))
+    fun fromString(serialized: String): CategoriesData{
+        return Gson().fromJson(serialized, CategoriesData::class.java)
     }
 
     @TypeConverter
-    fun toString(entity: List<CategoriesData.CategoriesItem>): String {
+    fun toString(entity: CategoriesData): String {
         return Gson().toJson(entity)
     }
 }

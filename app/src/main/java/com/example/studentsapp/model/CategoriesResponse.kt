@@ -1,7 +1,5 @@
 package com.example.studentsapp.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class CategoriesResponse(
@@ -9,7 +7,7 @@ data class CategoriesResponse(
     @SerializedName("data") val data: Categories
 ) {
     data class Categories(
-        @SerializedName("categories") val categories: List<CategoriesData>
+        @SerializedName("categories") val categories: CategoriesData
     )
 }
 

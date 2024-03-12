@@ -15,7 +15,7 @@ class CategoriesRepository @Inject constructor(
     fun getCategories(): Flow<CategoriesResponse> {
         return flow {
             val data = apiService.getCategories()
-            categoryDatabase.getCategoryDao().addCategoryData(data.data.categories)
+            categoryDatabase.getCategoryDao().addCategoryData(data.data.categories.items)
             emit(data)
         }
     }
