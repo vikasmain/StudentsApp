@@ -46,10 +46,10 @@ class CategoriesViewModel @Inject constructor(
 
     private fun mapCategoriesItemData(it: CategoriesResponse): List<CategoryItemData> {
         val categoriesItemDataList = mutableListOf<CategoryItemData>()
-        if (it.data.categories.items.isEmpty().not()) {
+        if (it.data.categories.isEmpty().not()) {
             categoriesItemDataList.add(CategoryItemData.SearchBar)
         }
-        it.data.categories.items.sortedBy { it.index }.forEach {
+        it.data.categories.forEach {
             categoriesItemDataList.add(
                 CategoryItemData.CategoryHeader(
                     title = it.title,

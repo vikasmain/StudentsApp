@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import com.example.studentsapp.database.CategoryDatabase
 import com.example.studentsapp.database.FeedDatabase
+import com.example.studentsapp.model.ArrayListConverter
 import com.example.studentsapp.model.FeedResponse
 import dagger.Module
 import dagger.Provides

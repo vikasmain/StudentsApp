@@ -7,7 +7,7 @@ data class CategoriesResponse(
     @SerializedName("data") val data: Categories
 ) {
     data class Categories(
-        @SerializedName("categories") val categories: CategoriesData
+        @SerializedName("categories") val categories: List<CategoriesData>
     )
 }
 

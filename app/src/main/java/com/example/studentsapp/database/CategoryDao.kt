@@ -9,8 +9,8 @@ import com.example.studentsapp.model.CategoriesData
 interface CategoryDao {
 
     @Insert
-    suspend fun addCategoryData(list: List<CategoriesData.CategoriesItem>)
+    suspend fun addCategoryData(data: List<CategoriesData>)
 
-    @Query("select * from categories")
-    suspend fun getCategoriesList(): List<CategoriesData.CategoriesItem>
+    @Query("select * from categoryData")
+    suspend fun getCategoriesList(): CategoriesData
 }

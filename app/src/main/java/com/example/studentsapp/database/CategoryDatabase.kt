@@ -14,23 +14,4 @@ abstract class CategoryDatabase : RoomDatabase() {
 
     abstract fun getCategoryDao(): CategoryDao
 
-    companion object {
-
-        @Volatile
-        private var instance: CategoryDatabase? = null
-
-        fun getDatabase(context: Context): CategoryDatabase? {
-            if (instance == null) {
-                synchronized(this) {
-                    instance =
-                        Room.databaseBuilder(
-                            context,
-                            CategoryDatabase::class.java,
-                            "categoryDB"
-                        ).build()
-                }
-            }
-            return instance
-        }
-    }
 }
