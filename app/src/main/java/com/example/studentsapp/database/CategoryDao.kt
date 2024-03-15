@@ -12,5 +12,5 @@ interface CategoryDao {
     suspend fun addCategoryData(data: List<CategoriesData>)
 
     @Query("select * from categoryData")
-    suspend fun getCategoriesList(): CategoriesData
+    suspend fun getCategoriesList(): List<CategoriesData>
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studentsapp.data.CategoryItemData
+import com.example.studentsapp.model.CategoriesData
 import com.example.studentsapp.model.CategoriesResponse
 import com.example.studentsapp.repository.CategoriesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,12 +45,12 @@ class CategoriesViewModel @Inject constructor(
         }
     }
 
-    private fun mapCategoriesItemData(it: CategoriesResponse): List<CategoryItemData> {
+    private fun mapCategoriesItemData(it: List<CategoriesData>): List<CategoryItemData> {
         val categoriesItemDataList = mutableListOf<CategoryItemData>()
-        if (it.data.categories.isEmpty().not()) {
+        if (it.isEmpty().not()) {
             categoriesItemDataList.add(CategoryItemData.SearchBar)
         }
-        it.data.categories.forEach {
+        it.forEach {
             categoriesItemDataList.add(
                 CategoryItemData.CategoryHeader(
                     title = it.title,
