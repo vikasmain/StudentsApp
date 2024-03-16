@@ -1,6 +1,7 @@
 package com.example.studentsapp.repository
 
 import android.content.Context
+import android.util.Log
 import com.example.studentsapp.api.ApiService
 import com.example.studentsapp.database.CategoryDatabase
 import com.example.studentsapp.model.CategoriesData
@@ -25,6 +26,7 @@ class CategoriesRepository @Inject constructor(
                 categoryDatabase.getCategoryDao().addCategoryData(data.data.categories)
                 emit(data.data.categories)
             } else {
+                //Might throw NPE if items list is empty in db
                 val list = categoryDatabase.getCategoryDao().getCategoriesList()
                 emit(list)
             }

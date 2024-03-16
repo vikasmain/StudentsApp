@@ -35,8 +35,10 @@ class CategoriesViewModel @Inject constructor(
                     mapCategoriesItemData(it)
                 }
                 .catch {
+                    Log.d("Trandport","oy"+it)
                     feedListStateFlow.value = null
                 }.onStart {
+
                 }
                 .onEach {
                     feedListStateFlow.value = it
@@ -50,6 +52,7 @@ class CategoriesViewModel @Inject constructor(
         if (it.isEmpty().not()) {
             categoriesItemDataList.add(CategoryItemData.SearchBar)
         }
+        Log.d("Trandport","mp "+it)
         it.forEach {
             categoriesItemDataList.add(
                 CategoryItemData.CategoryHeader(

@@ -13,7 +13,7 @@ import com.example.studentsapp.databinding.CategoriesSearchLayoutBinding
 
 class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.CategoriesViewHolder>() {
 
-    val categoriesList = mutableListOf<CategoryItemData>()
+    private val categoriesList = mutableListOf<CategoryItemData>()
 
     fun updateCategoriesList(categoriesData: List<CategoryItemData>) {
         categoriesList.clear()

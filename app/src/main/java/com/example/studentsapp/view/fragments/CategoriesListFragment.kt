@@ -46,11 +46,10 @@ class CategoriesListFragment : Fragment() {
                 fragmentCategoriesBinding.categoriesList.adapter = adapter
                 fragmentCategoriesBinding.categoriesList.layoutManager =
                     LinearLayoutManager(activity)
-                it?.let {
-                    it1 -> adapter.updateCategoriesList(it1)
+                it?.let { it1 ->
+                    adapter.updateCategoriesList(it1)
                 }
             }.catch {
-
             }.collect()
         }
     }
