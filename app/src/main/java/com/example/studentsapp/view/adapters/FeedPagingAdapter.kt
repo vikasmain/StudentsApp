@@ -12,10 +12,6 @@ import com.example.studentsapp.model.FeedResponse
 class FeedPagingAdapter :
     PagingDataAdapter<FeedResponse.FeedItem, FeedPagingAdapter.FeedViewHolder>(COMPARATOR) {
 
-    fun updateItemList(feedList: List<FeedResponse.FeedItem>) {
-
-    }
-
     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindDetails(item: FeedResponse.FeedItem) {

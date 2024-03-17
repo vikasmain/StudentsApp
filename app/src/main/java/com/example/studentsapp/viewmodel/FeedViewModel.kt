@@ -18,7 +18,7 @@ class FeedViewModel @Inject constructor(
     private val feedDatabase: FeedDatabase
 ) : ViewModel() {
 
-    val flow = Pager(
+    val feedDataFlow = Pager(
         PagingConfig(pageSize = 5, maxSize = 100),
         remoteMediator = FeedRemoteMediator(apiService, feedDatabase),
         //maxSize = number of pages to keep in in memory cache

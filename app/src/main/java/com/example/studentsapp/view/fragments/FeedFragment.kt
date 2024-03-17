@@ -46,7 +46,7 @@ class FeedFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
         }
         lifecycleScope.launch {
-            viewModel.flow.collectLatest {
+            viewModel.feedDataFlow.collectLatest {
                 feedPagingAdapter.submitData(it)
             }
         }
