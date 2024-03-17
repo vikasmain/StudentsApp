@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class FeedResponse(
-    @SerializedName("data") val data: Boolean,
+    @SerializedName("success") val data: Boolean,
     @SerializedName("total_pages") val totalPages: Int,
     @SerializedName("feed_item") val feedItem: List<FeedItem>
 ) {
@@ -13,6 +13,7 @@ data class FeedResponse(
     data class FeedItem(
         @PrimaryKey(autoGenerate = false)
         @SerializedName("id") val id: Int,
-        @SerializedName("data") val data: Boolean,
+        @SerializedName("title") val title: String,
+        @SerializedName("description") val description: String
     )
 }
