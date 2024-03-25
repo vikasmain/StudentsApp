@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.studentsapp.R
 import com.example.studentsapp.view.adapters.FeedPagingAdapter
 import com.example.studentsapp.databinding.HomeFragmentBinding
+import com.example.studentsapp.view.FeedItemDecorator
 import com.example.studentsapp.view.adapters.PagingLoaderAdapter
 import com.example.studentsapp.viewmodel.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,6 +46,12 @@ class FeedFragment : Fragment() {
                 footer = PagingLoaderAdapter()
             )
             layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(
+                FeedItemDecorator(
+                    horizontalSpace = resources.getDimensionPixelSize(R.dimen.dimen_8),
+                    verticalSpace = resources.getDimensionPixelSize(R.dimen.dimen_8)
+                )
+            )
         }
         lifecycleScope.launch {
             viewModel.feedDataFlow.collectLatest {
