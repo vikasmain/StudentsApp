@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studentsapp.R
 import com.example.studentsapp.databinding.FragmentCategoriesListBinding
+import com.example.studentsapp.view.FeedItemDecorator
 import com.example.studentsapp.view.adapters.CategoriesListAdapter
 import com.example.studentsapp.viewmodel.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +24,7 @@ import kotlinx.coroutines.launch
 class CategoriesListFragment : Fragment() {
 
     private val categoriesViewModel: CategoriesViewModel by viewModels()
-    lateinit var fragmentCategoriesBinding: FragmentCategoriesListBinding
+    private lateinit var fragmentCategoriesBinding: FragmentCategoriesListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +43,21 @@ class CategoriesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             categoriesViewModel.feedListStateFlow.onEach {
-                val adapter = CategoriesListAdapter()
-                fragmentCategoriesBinding.categoriesList.adapter = adapter
-                fragmentCategoriesBinding.categoriesList.layoutManager =
-                    LinearLayoutManager(activity)
-                it?.let { it1 ->
-                    adapter.updateCategoriesList(it1)
+                val categoriesAdapter = CategoriesListAdapter()
+                with(fragmentCategoriesBinding.categoriesList) {
+                    adapter = categoriesAdapter
+                    layoutManager = LinearLayoutManager(activity)
+                    addItemDecoration(
+                        FeedItemDecorator(
+                            horizontalSpace = resources.getDimensionPixelSize(R.dimen.dimen_8),
+                            verticalSpace = resources.getDimensionPixelSize(R.dimen.dimen_8)
+                        )
+                    )
+                    it?.let { it1 ->
+                        categoriesAdapter.updateCategoriesList(it1)
+                    }
                 }
+
             }.catch {
             }.collect()
         }
