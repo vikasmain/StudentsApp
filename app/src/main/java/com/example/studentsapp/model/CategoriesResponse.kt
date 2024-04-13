@@ -10,8 +10,3 @@ data class CategoriesResponse(
         @SerializedName("categories") val categories: List<CategoriesData>
     )
 }
-
-enum class Type(val type: String) {
-    IMPORTANT("important"),
-    ACTUAL("actual"),
-}

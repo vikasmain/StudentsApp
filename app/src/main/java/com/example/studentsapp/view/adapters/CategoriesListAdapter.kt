@@ -1,6 +1,5 @@
 package com.example.studentsapp.view.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -120,8 +119,6 @@ class CategoriesListAdapter : RecyclerView.Adapter<CategoriesListAdapter.Categor
                     categoriesList[position] as? CategoryItemData.CategoryHeader
                 )
             }
-
-            else -> {}
         }
     }
 }

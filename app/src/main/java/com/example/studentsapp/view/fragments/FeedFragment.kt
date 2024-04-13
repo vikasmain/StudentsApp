@@ -32,7 +32,7 @@ class FeedFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         homeFragmentBinding = HomeFragmentBinding.inflate(layoutInflater)
         return homeFragmentBinding.root
     }
