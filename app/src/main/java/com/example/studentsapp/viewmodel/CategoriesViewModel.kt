@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
@@ -22,20 +23,19 @@ class CategoriesViewModel @Inject constructor(
     private val categoriesRepository: CategoriesRepository
 ) : ViewModel() {
 
-    init {
-        getCategories()
-    }
 
     val feedListStateFlow = MutableStateFlow<List<CategoryItemData>?>(null)
 
+    val categoriesFlow:MutableStateFlow<List<CategoriesData>> = flow{
+
+    }.switchMap(::getCategories)
     fun getCategories() {
         viewModelScope.launch {
-            categoriesRepository.getCategories()
+          categoriesRepository.getCategories()
                 .map {
                     mapCategoriesItemData(it)
                 }
                 .catch {
-                    Log.d("Trandport","oy"+it)
                     feedListStateFlow.value = null
                 }.onStart {
 
@@ -52,7 +52,6 @@ class CategoriesViewModel @Inject constructor(
         if (it.isEmpty().not()) {
             categoriesItemDataList.add(CategoryItemData.SearchBar)
         }
-        Log.d("Trandport","mp "+it)
         it.forEach {
             categoriesItemDataList.add(
                 CategoryItemData.CategoryHeader(

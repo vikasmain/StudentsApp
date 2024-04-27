@@ -16,7 +16,6 @@ data class CategoriesData(
     data class CategoriesItem(
         @SerializedName("title") val title: String,
         @SerializedName("description") val description: String?,
-        @SerializedName("type") val type: Type?,
         @SerializedName("likes") val likes: Int?,
         @SerializedName("comments") val comments: Int?
     )
