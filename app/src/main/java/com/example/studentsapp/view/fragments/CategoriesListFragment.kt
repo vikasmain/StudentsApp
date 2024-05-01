@@ -41,8 +41,9 @@ class CategoriesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        categoriesViewModel.getCategories()
         lifecycleScope.launch {
-            categoriesViewModel.feedListStateFlow.onEach {
+            categoriesViewModel.categoriesFlow.onEach {
                 val categoriesAdapter = CategoriesListAdapter()
                 with(fragmentCategoriesBinding.categoriesList) {
                     adapter = categoriesAdapter

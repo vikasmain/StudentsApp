@@ -8,6 +8,7 @@ import com.example.studentsapp.model.CategoriesData
 import com.example.studentsapp.model.CategoriesResponse
 import com.example.studentsapp.repository.CategoriesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.switchMap
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,14 +26,14 @@ class CategoriesViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    val feedListStateFlow = MutableStateFlow<List<CategoryItemData>?>(null)
+    private val feedListStateFlow = MutableStateFlow<List<CategoryItemData>?>(null)
 
-    val categoriesFlow:MutableStateFlow<List<CategoriesData>> = flow{
+    val categoriesFlow: MutableStateFlow<List<CategoryItemData>?>
+        get() = feedListStateFlow
 
-    }.switchMap(::getCategories)
     fun getCategories() {
         viewModelScope.launch {
-          categoriesRepository.getCategories()
+            categoriesRepository.getCategories()
                 .map {
                     mapCategoriesItemData(it)
                 }
