@@ -1,6 +1,7 @@
 package com.example.studentsapp.api
 
 import com.example.studentsapp.model.CategoriesResponse
+import com.example.studentsapp.model.CategoriesTopData
 import com.example.studentsapp.model.FeedResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,4 +13,7 @@ interface ApiService {
 
     @GET("categories")
     suspend fun getCategories(): CategoriesResponse
+
+    @GET("/more_categories_data")
+    suspend fun getTopCategories(): CategoriesTopData
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.studentsapp.api.ApiService
 import com.example.studentsapp.database.CategoryDatabase
 import com.example.studentsapp.model.CategoriesData
+import com.example.studentsapp.model.CategoriesTopData
 import com.example.studentsapp.utils.NetworkUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -28,6 +29,12 @@ class CategoriesRepository @Inject constructor(
                 val list = categoryDatabase.getCategoryDao().getCategoriesList()
                 emit(list)
             }
+        }
+    }
+
+    fun getTopData(): Flow<CategoriesTopData> {
+        return flow {
+            emit(apiService.getTopCategories())
         }
     }
 }
