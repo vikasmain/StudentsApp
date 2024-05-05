@@ -55,11 +55,11 @@ class CategoriesListFragment : Fragment() {
                         )
                     )
                     it?.let { it1 ->
-                        categoriesAdapter.updateCategoriesList(it1)
+                        categoriesAdapter.updateCategoriesList(it1.categoriesItem)
                     }
                 }
-
             }.catch {
+                Log.e("CategoriesFragment", "Error observing categories list fragment $it")
             }.collect()
         }
     }
