@@ -9,6 +9,7 @@ import com.example.studentsapp.model.CategoriesDataModel
 import com.example.studentsapp.repository.CategoriesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
@@ -29,21 +30,23 @@ class SearchViewModel @Inject constructor(
 
     fun getCategories() {
         viewModelScope.launch {
-            try {
-                val categoriesDataDeferred = async {
-                    categoriesRepository.getCategories().map {
-                        mapCategoriesItemData(it)
+            coroutineScope {
+                try {
+                    val categoriesDataDeferred = async {
+                        categoriesRepository.getCategories().map {
+                            mapCategoriesItemData(it)
+                        }
                     }
+                    val topDataDeferred = async { categoriesRepository.getTopData() }
+                    val categoriesData = categoriesDataDeferred.await()
+                    val topData = topDataDeferred.await()
+                    feedListStateFlow.value = CategoriesDataModel(
+                        categoriesTopData = topData.first(),
+                        categoriesItem = categoriesData.first()
+                    )
+                } catch (e: Exception) {
+                    Log.e("CategoryViewModel", "Error" + e.message)
                 }
-                val topDataDeferred = async { categoriesRepository.getTopData() }
-                val categoriesData = categoriesDataDeferred.await()
-                val topData = topDataDeferred.await()
-                feedListStateFlow.value = CategoriesDataModel(
-                    categoriesTopData = topData.first(),
-                    categoriesItem = categoriesData.first()
-                )
-            } catch (e: Exception) {
-                Log.e("CategoryViewModel", "Error" + e.message)
             }
         }
     }
