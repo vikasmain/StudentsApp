@@ -10,10 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studentsapp.R
-import com.example.studentsapp.databinding.FragmentCategoriesListBinding
+import com.example.studentsapp.databinding.FragmentSearchListBinding
 import com.example.studentsapp.view.FeedItemDecorator
 import com.example.studentsapp.view.adapters.CategoriesListAdapter
-import com.example.studentsapp.viewmodel.CategoriesViewModel
+import com.example.studentsapp.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -21,10 +21,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CategoriesListFragment : Fragment() {
+class SearchListFragment : Fragment() {
 
-    private val categoriesViewModel: CategoriesViewModel by viewModels()
-    private lateinit var fragmentCategoriesBinding: FragmentCategoriesListBinding
+    private val searchViewModel: SearchViewModel by viewModels()
+    private lateinit var fragmentSearchListBinding: FragmentSearchListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,17 +35,19 @@ class CategoriesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        fragmentCategoriesBinding = FragmentCategoriesListBinding.inflate(layoutInflater)
-        return fragmentCategoriesBinding.root
+        fragmentSearchListBinding = FragmentSearchListBinding.inflate(layoutInflater)
+        return fragmentSearchListBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        categoriesViewModel.getCategories()
+        searchViewModel.getCategories()
         lifecycleScope.launch {
-            categoriesViewModel.categoriesFlow.onEach {
+            searchViewModel.categoriesFlow.onEach { categoriesDataModel ->
                 val categoriesAdapter = CategoriesListAdapter()
-                with(fragmentCategoriesBinding.categoriesList) {
+                fragmentSearchListBinding.textView.text =
+                    categoriesDataModel?.categoriesTopData?.categoriesData?.title
+                with(fragmentSearchListBinding.categoriesList) {
                     adapter = categoriesAdapter
                     layoutManager = LinearLayoutManager(activity)
                     addItemDecoration(
@@ -54,12 +56,12 @@ class CategoriesListFragment : Fragment() {
                             verticalSpace = resources.getDimensionPixelSize(R.dimen.dimen_8)
                         )
                     )
-                    it?.let { it1 ->
-                        categoriesAdapter.updateCategoriesList(it1.categoriesItem)
+                    categoriesDataModel?.let { it ->
+                        categoriesAdapter.updateCategoriesList(it.categoriesItem)
                     }
                 }
             }.catch {
-                Log.e("CategoriesFragment", "Error observing categories list fragment $it")
+                Log.e("SearchFragment", "Error observing categories list fragment $it")
             }.collect()
         }
     }
