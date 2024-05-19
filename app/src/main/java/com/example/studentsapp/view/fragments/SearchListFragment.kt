@@ -56,8 +56,8 @@ class SearchListFragment : Fragment() {
                             verticalSpace = resources.getDimensionPixelSize(R.dimen.dimen_8)
                         )
                     )
-                    categoriesDataModel?.let { it ->
-                        categoriesAdapter.updateCategoriesList(it.categoriesItem)
+                    categoriesDataModel?.categoriesItem?.let {
+                        categoriesAdapter.updateCategoriesList(it)
                     }
                 }
             }.catch {

@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,23 +31,29 @@ class SearchViewModel @Inject constructor(
 
     fun getCategories() {
         viewModelScope.launch {
-            coroutineScope {
-                try {
-                    val categoriesDataDeferred = async {
-                        categoriesRepository.getCategories().map {
-                            mapCategoriesItemData(it)
-                        }
+            supervisorScope {
+                val categoriesDataDeferred = async {
+                    categoriesRepository.getCategories().map {
+                        mapCategoriesItemData(it)
                     }
-                    val topDataDeferred = async { categoriesRepository.getTopData() }
-                    val categoriesData = categoriesDataDeferred.await()
-                    val topData = topDataDeferred.await()
-                    feedListStateFlow.value = CategoriesDataModel(
-                        categoriesTopData = topData.first(),
-                        categoriesItem = categoriesData.first()
-                    )
-                } catch (e: Exception) {
-                    Log.e("CategoryViewModel", "Error" + e.message)
                 }
+                val topDataDeferred = async { categoriesRepository.getTopData() }
+                val categoriesData = try {
+                    categoriesDataDeferred.await()
+                } catch (e: Exception) {
+                    Log.e("SearchViewModel", "Error message $e")
+                    null
+                }
+                val topData = try {
+                    topDataDeferred.await()
+                } catch (e: Exception) {
+                    Log.e("SearchViewModel", "Error message $e")
+                    null
+                }
+                feedListStateFlow.value = CategoriesDataModel(
+                    categoriesTopData = topData?.first(),
+                    categoriesItem = categoriesData?.first()
+                )
             }
         }
     }
