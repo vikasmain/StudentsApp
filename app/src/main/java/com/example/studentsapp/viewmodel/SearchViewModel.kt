@@ -74,6 +74,10 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    fun getSearchQueryData() {
+
+    }
+
     private fun mapCategoriesItemData(it: List<CategoriesData>): List<CategoryItemData> {
         val categoriesItemDataList = mutableListOf<CategoryItemData>()
         if (it.isEmpty().not()) {
