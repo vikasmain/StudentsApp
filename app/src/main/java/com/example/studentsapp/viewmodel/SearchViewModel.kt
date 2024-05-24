@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
@@ -53,6 +54,21 @@ class SearchViewModel @Inject constructor(
                 feedListStateFlow.value = CategoriesDataModel(
                     categoriesTopData = topData?.first(),
                     categoriesItem = categoriesData?.first()
+                )
+            }
+        }
+    }
+
+    //parallel api calls using zip operator, zip operator returns result of multiplr tasks in single callback when all the tasks are completed.
+
+    fun getCategoriesUsingZipOperator() {
+        viewModelScope.launch {
+            categoriesRepository.getCategories().map {
+                mapCategoriesItemData(it)
+            }.zip(categoriesRepository.getTopData()) { categoryItemData, categoriesTopData ->
+                feedListStateFlow.value = CategoriesDataModel(
+                    categoriesTopData = categoriesTopData,
+                    categoriesItem = categoryItemData
                 )
             }
         }
