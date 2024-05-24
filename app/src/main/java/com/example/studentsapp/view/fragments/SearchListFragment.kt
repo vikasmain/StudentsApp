@@ -88,7 +88,9 @@ class SearchListFragment : Fragment() {
     fun handleSearchView() {
         lifecycleScope.launch {
             fragmentSearchListBinding.searchBar.getSearchFlow()
+                //debounce will not call any api call till 200 miliseconds if any new item comes in between 200 ms it will discard old item and will call api for new item
                 .debounce(200)
+                //The filter operator is used to filter the unwanted string like an empty string in this case to avoid the unnecessary network call.
                 .filter {
                     if (it == "") {
                         searchText = ""
@@ -97,7 +99,17 @@ class SearchListFragment : Fragment() {
                         return@filter true
                     }
                 }
+                //he distinctUntilChanged operator is used to avoid duplicate network calls.
+                // Let say the last on-going search query was “abc” and the user deleted “c” and again typed “c”.
+                // So again it’s “abc”. So if the network call is already going on with the search query “abc”,
+                // it will not make the duplicate call again with the search query “abc”.
+                // So, distinctUntilChanged suppress duplicate consecutive items emitted by the source.
                 .distinctUntilChanged()
+                // Here, the flatMapLatest operator is used to avoid the network call results which are not needed more for displaying to the user.
+                // Let say the last search query was “ab” and there is an ongoing network call for “ab” and the user typed “abc”.
+                // Then, we are no more interested in the result of “ab”. We are only interested in the result of “abc”.
+                // So, the flatMapLatest comes to the rescue.
+                // It only provides the result for the last search query(most recent) and ignores the rest.
                 .flatMapLatest { searchQuery ->
                     fetchDataFromNetwork(searchQuery).catch {
                         emitAll(flowOf("error"))
